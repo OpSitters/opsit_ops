@@ -26,3 +26,4 @@ if node['opsit']['handlers']['json']['enabled'] == true
     arguments :path => '/var/chef/reports'
     action :disable
   end
+end
