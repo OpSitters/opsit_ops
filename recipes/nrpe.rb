@@ -21,6 +21,8 @@
 node.set['nrpe']['multi_environment_monitoring'] = 0
 node.set['nrpe']['dont_blame_nrpe'] = 1
 node.set['nrpe']['command_timeout'] = 90
+node.set['nrpe']['using_solo_search'] = true
+node.set['nrpe']['server_role'] = node['nagios']['server_role']
 
 case node['platform_family']
 when 'rhel', 'fedora'
