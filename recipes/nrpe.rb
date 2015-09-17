@@ -67,31 +67,30 @@ node.set['nrpe']['allowed_hosts'] = server_hosts
     node.set['nrpe']['packages'] = %w(nrpe nagios-plugins-disk nagios-plugins-load nagios-plugins-procs nagios-plugins-users nagios-plugins-all nagios-plugins-nrpe)
   end
 
-  include_recipe "nrpe"
+include_recipe "nrpe"
 
-  # Check the current system load average
-  nrpe_check "check_load" do
-    command "#{node['nrpe']['plugin_dir']}/check_load"
-    warning_condition '5'
-    critical_condition '10'
-    action :add
-  end
+# Check the current system load average
+nrpe_check "check_load" do
+  command "#{node['nrpe']['plugin_dir']}/check_load"
+  warning_condition '5'
+  critical_condition '10'
+  action :add
+end
 
-  # Check all local disks and ensure NFS is not stale.
-  nrpe_check 'check_all_disks' do
-    command "#{node['nrpe']['plugin_dir']}/check_disk"
-    warning_condition '8%'
-    critical_condition '5%'
-    parameters '-L'
-    action :add
-  end
+# Check all local disks and ensure NFS is not stale.
+nrpe_check 'check_all_disks' do
+  command "#{node['nrpe']['plugin_dir']}/check_disk"
+  warning_condition '8%'
+  critical_condition '5%'
+  parameters '-L'
+  action :add
+end
 
-  # Check for excessive users.  This command relies on the service definition to
-  # define what the warning/critical levels and attributes are
-  nrpe_check 'check_users' do
-    command "#{node['nrpe']['plugin_dir']}/check_users"
-    warning_condition '3'
-    critical_condition '5'
-    action :add
-  end
+# Check for excessive users.  This command relies on the service definition to
+# define what the warning/critical levels and attributes are
+nrpe_check 'check_users' do
+  command "#{node['nrpe']['plugin_dir']}/check_users"
+  warning_condition '3'
+  critical_condition '5'
+  action :add
 end
