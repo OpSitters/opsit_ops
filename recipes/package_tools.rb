@@ -75,6 +75,7 @@ if platform_family?('rhel')
   %w{ htop multitail lockfile-progs}.each do |pkg|
     package pkg do
       action :install
+      ignore_failure true
     end
   end
 end
