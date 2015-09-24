@@ -43,7 +43,7 @@ end
 server_hosts = Array.new
 dev_server_hosts = ["192.168.36.201"]
 
-if node.roles.include?(['opsit']['services']['munin']['role'])
+if node.roles.include?(node['opsit']['services']['munin']['role'])
   server_hosts = ["127.0.0.1"]
 elsif Chef::Config[:solo] or node.chef_environment == "dev"
   server_hosts = dev_server_hosts
