@@ -73,6 +73,7 @@ node.set['munin']['server_list'] = server_hosts
 case node[:platform]
 when 'ubuntu', 'debian'
   package 'libwww-perl'
+  package 'libcache-cache-perl'
 end
 
 # Always run the lastest version
