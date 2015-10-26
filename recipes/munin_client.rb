@@ -49,9 +49,9 @@ elsif Chef::Config[:solo] or node.chef_environment == "dev"
   server_hosts = dev_server_hosts
 else
   if node['munin']['host_environment'].nil?
-    node.set['munin']['server_search'] = "role:#{node['munin']['server_role']}"
+    node.set['munin']['server_search'] = "roles:#{node['munin']['server_role']}"
   else
-    node.set['munin']['server_search'] = "role:#{node['munin']['server_role']} AND chef_environment:#{node['munin']['host_environment']}"
+    node.set['munin']['server_search'] = "roles:#{node['munin']['server_role']} AND chef_environment:#{node['munin']['host_environment']}"
   end
   server_nodes = search(:node, node['munin']['server_search'])
   results = server_nodes

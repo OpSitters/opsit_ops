@@ -18,7 +18,7 @@
 #
 
 
-node.set['nrpe']['multi_environment_monitoring'] = 0
+node.set['nrpe']['multi_environment_monitoring'] = false
 node.set['nrpe']['dont_blame_nrpe'] = 1
 node.set['nrpe']['command_timeout'] = 90
 node.set['nrpe']['using_solo_search'] = true
@@ -44,9 +44,9 @@ elsif Chef::Config[:solo] or node.chef_environment == "dev"
   server_hosts = dev_server_hosts
 else
   if node['nagios']['host_environment'].nil?
-    node.set['nagios']['server_search'] = "role:#{node['nagios']['server_role']}"
+    node.set['nagios']['server_search'] = "roles:#{node['nagios']['server_role']}"
   else
-    node.set['nagios']['server_search'] = "role:#{node['nagios']['server_role']} AND chef_environment:#{node['nagios']['host_environment']}"
+    node.set['nagios']['server_search'] = "roles:#{node['nagios']['server_role']} AND chef_environment:#{node['nagios']['host_environment']}"
   end
   server_nodes = search(:node, node['nagios']['server_search'])
   results = server_nodes
