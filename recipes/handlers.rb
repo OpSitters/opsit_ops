@@ -27,3 +27,36 @@ if node['opsit']['handlers']['json']['enabled'] == true
     action :disable
   end
 end
+
+
+
+include_recipe "chef_handler"
+
+chef_handler "Chef::Handler::JsonFile" do
+  source "chef/handler/json_file"
+    arguments :path => '/var/chef/reports'
+    action :disable
+end
+
+chef_gem "httparty" do
+  version "0.11.0"
+  action :nothing
+end.run_action(:install)
+
+chef_gem "chef-handler-slack" do
+  action :upgrade
+end
+
+handler_file = "/var/chef/handlers/slack.rb"
+handler_source = "slack.rb"
+
+cookbook_file handler_file do
+  source handler_source
+  mode "0600"
+  action :nothing
+end.run_action(:create)
+
+chef_handler "Chef::Handler::SlackReporting" do
+  source handler_file
+  action :nothing
+end.run_action(:enable)

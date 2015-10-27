@@ -24,7 +24,7 @@ PermitRootLogin no
 StrictModes yes
 RSAAuthentication yes
 PubkeyAuthentication yes
-PasswordAuthentication no
+PasswordAuthentication <%= node['opsit']['sshd']['password_auth'] %>
 #RequiredAuthentications2 publickey,password #TODO build OpenSSH deb > 6.1
 IgnoreRhosts yes
 RhostsRSAAuthentication no
