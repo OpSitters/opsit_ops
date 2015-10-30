@@ -28,9 +28,9 @@ elsif Chef::Config[:solo] or node.chef_environment == "dev"
   server_hosts = dev_server_hosts
 else
   if node['carbon']['host_environment'].nil?
-    node.set['carbon']['server_search'] = "role:#{node['carbon']['server_role']}"
+    node.set['carbon']['server_search'] = "roles:#{node['carbon']['server_role']}"
   else
-    node.set['carbon']['server_search'] = "role:#{node['carbon']['server_role']} AND chef_environment:#{node['carbon']['host_environment']}"
+    node.set['carbon']['server_search'] = "roles:#{node['carbon']['server_role']} AND chef_environment:#{node['carbon']['host_environment']}"
   end
   server_nodes = search(:node, node['carbon']['server_search'])
   results = server_nodes
