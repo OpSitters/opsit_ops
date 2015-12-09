@@ -20,7 +20,7 @@ LogLevel INFO
 
 # Authentication
 LoginGraceTime 120
-PermitRootLogin no
+PermitRootLogin <%= node['opsit']['sshd']['permit_root_login'] %>
 StrictModes yes
 RSAAuthentication yes
 PubkeyAuthentication yes
