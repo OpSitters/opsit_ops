@@ -25,7 +25,7 @@ StrictModes yes
 RSAAuthentication yes
 PubkeyAuthentication yes
 PasswordAuthentication <%= node['opsit']['sshd']['password_auth'] %>
-RequiredAuthentications2 publickey,password
+#RequiredAuthentications2 publickey,password
 IgnoreRhosts yes
 RhostsRSAAuthentication no
 HostbasedAuthentication no
