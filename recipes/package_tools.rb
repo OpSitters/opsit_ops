@@ -67,6 +67,7 @@ if platform_family?('rhel')
     }.each do |pkg|
     p=package pkg do
       action :nothing
+      ignore_failure true
     end
     p.run_action(:install)
   end
