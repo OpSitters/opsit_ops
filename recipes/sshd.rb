@@ -17,9 +17,15 @@
 # limitations under the License.
 #
 
-service_provider = Chef::Provider::Service::Upstart if 'ubuntu' == node['platform'] &&
-  Chef::VersionConstraint.new('>= 12.04').include?(node['platform_version'])
+service_provider = nil
 
+if  'ubuntu' == node['platform']
+  if Chef::VersionConstraint.new('>= 15.04').include?(node['platform_version'])
+    service_provider = Chef::Provider::Service::Systemd
+  elsif Chef::VersionConstraint.new('>= 12.04').include?(node['platform_version'])
+    service_provider = Chef::Provider::Service::Upstart
+  end
+end
 
 node.set['openssh']['service_name'] = case node['platform_family']
   when 'rhel', 'fedora', 'suse', 'freebsd', 'gentoo', 'arch'
