@@ -11,7 +11,6 @@ depends "opsit_libs"
 %w{
   apt
   chef_handler
-  munin
   nrpe
   route53
   rsyslog

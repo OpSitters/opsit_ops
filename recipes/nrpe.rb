@@ -64,7 +64,7 @@ end
 node.set['nrpe']['allowed_hosts'] = server_hosts
 
   if node['platform_family'] == "rhel"
-    node.set['nrpe']['packages'] = %w(nrpe nagios-plugins-disk nagios-plugins-load nagios-plugins-procs nagios-plugins-users nagios-plugins-all nagios-plugins-nrpe)
+#    node.set['nrpe']['packages'] = %w(nrpe nagios-plugins-disk nagios-plugins-load nagios-plugins-procs nagios-plugins-users nagios-plugins-all nagios-plugins-nrpe)
   end
 
 include_recipe "nrpe"
