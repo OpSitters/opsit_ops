@@ -32,7 +32,7 @@ if platform_family?('debian')
   include_recipe "apt"
   %w{
       htop multitail lockfile-progs vim nmon netcat-openbsd telnet ntp
-      ifupdown-extra netcat-traditional whois nmap bridge-utils vlan psmisc
+      ifupdown-extra netcat-traditional whois nmap bridge-utils vlan psmisc libnss-myhostname
     }.each do |pkg|
     p=package pkg do
       action :nothing
