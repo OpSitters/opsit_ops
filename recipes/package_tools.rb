@@ -40,17 +40,33 @@ if platform_family?('debian')
     p.run_action(:install)
   end
   if platform?("ubuntu")
-    apt_package "openssl" do
-      version "1.0.1-4ubuntu5.10"
-      action :upgrade
-    end
-    apt_package "libssl1.0.0" do
-      version "1.0.1-4ubuntu5.10"
-      action :upgrade
-    end
-    apt_package "libssl-dev" do
-      version "1.0.1-4ubuntu5.10"
-      action :upgrade
+    if node['platform_version'].to_f >= 20.04
+      apt_package "openssl" do
+        action :upgrade
+      end
+
+      apt_package "libssl1.1" do
+        action :upgrade
+      end
+
+      apt_package "libssl-dev" do
+        action :upgrade
+      end
+    else
+      apt_package "openssl" do
+        version "1.0.1-4ubuntu5.10"
+        action :upgrade
+      end
+
+      apt_package "libssl1.0.0" do
+        version "1.0.1-4ubuntu5.10"
+        action :upgrade
+      end
+
+      apt_package "libssl-dev" do
+        version "1.0.1-4ubuntu5.10"
+        action :upgrade
+      end
     end
   end
 
